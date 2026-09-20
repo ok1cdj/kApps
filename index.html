@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apps for the Mudita Kompakt · Ondřej Koloničný</title>
+<meta name="description" content="Free, open-source Android apps built for the Mudita Kompakt e-ink phone. No Google Services, no tracking, no background services.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script defer src="https://stats.ok1cdj.com/analytics-x7f2" data-website-id="8c0d1f18-2d86-46d3-ae2c-e1a9d4603a86"></script>
+<style>
+  :root{
+    --paper:#ffffff;
+    --ink:#000000;
+    --ink-soft:#4a4a4a;
+    --rule:#000000;
+    --dither: repeating-conic-gradient(var(--ink) 0% 25%, transparent 0% 50%) 0 0 / 4px 4px;
+    --gap: clamp(1.5rem, 4vw, 3rem);
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    color-scheme: light dark;
+  }
+  :root:not([data-theme="light"]){ }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0b0b0b;
+      --ink:#f2f2f2;
+      --ink-soft:#a5a5a5;
+      --rule:#f2f2f2;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0b0b0b; --ink:#f2f2f2; --ink-soft:#a5a5a5; --rule:#f2f2f2;
+  }
+  *,*::before,*::after{box-sizing:inherit}
+  html{-webkit-text-size-adjust:100%; scroll-padding-top: env(safe-area-inset-top, 0px);}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+    font-size:17px;
+    line-height:1.5;
+    font-variant-numeric:tabular-nums;
+  }
+  .wrap{max-width:62rem;margin:0 auto;padding:0 var(--gap)}
+
+  /* one-time e-ink refresh flash */
+  #flash{position:fixed;inset:0;background:var(--ink);z-index:99;pointer-events:none;opacity:0}
+  #flash.run{animation:eink 200ms steps(1) forwards}
+  @keyframes eink{0%{opacity:1}55%{opacity:1}56%{opacity:0}100%{opacity:0}}
+  @media (prefers-reduced-motion: reduce){#flash{display:none}}
+
+  header.top{display:flex;justify-content:space-between;align-items:baseline;padding:1.5rem 0 0}
+  .call{font-weight:700;letter-spacing:.02em}
+  .top a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);font-size:.9rem}
+
+  .hero{padding:clamp(3rem,9vw,6rem) 0 clamp(2rem,5vw,3.5rem)}
+  h1{
+    font-size:clamp(2.4rem,7.5vw,4.6rem);
+    line-height:.98;
+    letter-spacing:-.035em;
+    font-weight:700;
+    margin:0 0 1.2rem;
+    max-width:16ch;
+  }
+  .lede{font-size:clamp(1.02rem,2.2vw,1.2rem);max-width:54ch;color:var(--ink-soft);margin:0}
+  .facts{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.6rem 0 0;padding:0;list-style:none}
+  .facts li{border:1px solid var(--rule);padding:.18rem .55rem;font-size:.82rem;font-weight:500}
+
+  .apps{border-top:1px solid var(--rule)}
+  .app{
+    display:grid;
+    grid-template-columns:132px 1fr;
+    gap:clamp(1rem,3vw,2.2rem);
+    padding:clamp(1.6rem,4vw,2.4rem) 0;
+    border-bottom:1px solid var(--rule);
+    align-items:start;
+  }
+  .shot{border:1px solid var(--rule);aspect-ratio:9/19;background:var(--paper);display:block;width:100%;object-fit:cover}
+  .shot-empty{background:var(--dither);opacity:.32}
+  .app h2{font-size:1.5rem;letter-spacing:-.02em;margin:0 0 .3rem;font-weight:700}
+  .app p{margin:0;max-width:52ch;color:var(--ink-soft)}
+  .meta{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-top:.5rem;font-size:.82rem;min-height:1.4rem}
+  .chip{background:var(--ink);color:var(--paper);padding:.12rem .5rem;font-weight:600}
+  .muted{color:var(--ink-soft)}
+  .links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.1rem}
+  .btn{
+    display:inline-block;border:1px solid var(--rule);padding:.42rem .9rem;
+    text-decoration:none;color:var(--ink);font-weight:600;font-size:.92rem;background:var(--paper);
+  }
+  .btn.solid{background:var(--ink);color:var(--paper)}
+  .btn:hover,.btn:focus-visible{outline:none;box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--rule)}
+  a:focus-visible{outline:2px solid var(--rule);outline-offset:2px}
+
+  .install{padding:clamp(2.4rem,6vw,4rem) 0;display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+  .install h3{margin:0 0 .5rem;font-size:1.05rem;font-weight:700}
+  .install p{margin:0;color:var(--ink-soft);max-width:44ch;font-size:.95rem}
+  .install code{font-size:.85em;border:1px solid var(--rule);padding:0 .28em}
+  .install a{color:inherit}
+
+  footer{border-top:1px solid var(--rule);padding:1.6rem 0 3rem;display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:space-between;font-size:.9rem}
+  footer a{color:inherit}
+  footer nav{display:flex;flex-wrap:wrap;gap:1.2rem}
+
+  @media (max-width:700px){
+    .app{grid-template-columns:96px 1fr;gap:1rem}
+    .install{grid-template-columns:1fr;gap:1.6rem}
+  }
+  @media (max-width:420px){
+    .app{grid-template-columns:1fr}
+    .shot{max-width:132px}
+  }
+</style>
+</head>
+<body>
+<div id="flash"></div>
+
+<div class="wrap">
+  <header class="top">
+    <span class="call">Ondřej Koloničný</span>
+    <a href="https://apps.ok1cdj.com">Web apps for hams</a>
+  </header>
+
+  <section class="hero">
+    <h1>Apps for a phone that shows no colour.</h1>
+    <p class="lede">Small, single-purpose Android apps for the Mudita Kompakt. Designed around e-ink from the first line of code, not ported to it afterwards.</p>
+    <ul class="facts">
+      <li>No Google Services</li>
+      <li>No background services</li>
+      <li>No tracking in the apps</li>
+      <li>GPL-3.0</li>
+    </ul>
+  </section>
+
+  <main class="apps" id="apps"></main>
+
+  <section class="install">
+    <div>
+      <h3>Installing</h3>
+      <p>Download the APK and open it on the phone, or push it over ADB with <code>adb install</code>. The Kompakt will ask you to allow installs from the browser or file manager once.</p>
+    </div>
+    <div>
+      <h3>Staying up to date</h3>
+      <p>Add the GitHub repository to <a href="https://github.com/ImranR98/Obtainium">Obtainium</a> and it will pick up every new release on its own.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Ondřej Koloničný</span>
+    <nav>
+      <a href="https://github.com/ok1cdj">GitHub</a>
+      <a href="https://revolut.me/ok1cdj">Revolut</a>
+      <a href="https://buymeacoffee.com/ok1cdj">Buy me a coffee</a>
+    </nav>
+  </footer>
+</div>
+
+<script>
+const OWNER = "ok1cdj";
+const APPS = [
+  { repo:"kRadar", name:"kRadar",
+    desc:"Precipitation radar. RainViewer data over an offline vector map, quantised to the greys e-ink can actually print. Finds you with the AOSP location provider." },
+  { repo:"kCompass", name:"kCompass",
+    desc:"GPS, compass and Maidenhead locator down to eight characters. Magnetic or true north, satellite list, freeze button for reading a fix while you move." },
+  { repo:"kZivyobraz", name:"kZivyobraz",
+    desc:"Client for the zivyobraz.eu e-paper service. Pulls the current 480×800 screen for your display so you can check it without a computer." },
+  { repo:"kSread", name:"kSread",
+    desc:"Speed reader. Shows one word at a time in the centre of the screen, which suits a display that hates scrolling." },
+  { repo:"kChat", name:"kChat",
+    desc:"Plain client for OpenAI-compatible chat endpoints. Point it at your own server or any provider with an API key." },
+  { repo:"kVexed", name:"kVexed",
+    desc:"The classic Vexed sliding-block puzzle. Nudge blocks together to clear the board — fully offline, no permissions, and rendered in flat black-and-white for e-ink." }
+];
+
+const CACHE_KEY = "ok1cdj-releases-v1";
+const CACHE_MS = 60 * 60 * 1000;
+
+function readCache(){
+  try{
+    const raw = localStorage.getItem(CACHE_KEY);
+    if(!raw) return {};
+    const obj = JSON.parse(raw);
+    if(!obj || Date.now() - obj.t > CACHE_MS) return {};
+    return obj.d || {};
+  }catch(e){ return {}; }
+}
+function writeCache(d){
+  try{ localStorage.setItem(CACHE_KEY, JSON.stringify({t:Date.now(), d:d})); }catch(e){}
+}
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function render(){
+  document.getElementById("apps").innerHTML = APPS.map(a => `
+    <article class="app" id="app-${a.repo}">
+      <img class="shot" src="screenshots/${a.repo.toLowerCase()}.png" alt="${esc(a.name)} on the Mudita Kompakt"
+           loading="lazy" onerror="this.classList.add('shot-empty');this.removeAttribute('src');this.alt='';">
+      <div>
+        <h2>${esc(a.name)}</h2>
+        <p>${esc(a.desc)}</p>
+        <div class="meta" data-meta="${a.repo}"></div>
+        <div class="links">
+          <a class="btn solid" data-apk="${a.repo}" href="https://github.com/${OWNER}/${a.repo}/releases">Releases</a>
+          <a class="btn" href="https://github.com/${OWNER}/${a.repo}">Source</a>
+        </div>
+      </div>
+    </article>`).join("");
+}
+
+function fill(repo, rel){
+  const meta = document.querySelector(`[data-meta="${repo}"]`);
+  const btn = document.querySelector(`[data-apk="${repo}"]`);
+  if(!meta || !rel) return;
+  const apk = (rel.assets || []).find(x => /\.apk$/i.test(x.name));
+  const date = rel.published_at ? new Date(rel.published_at).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}) : "";
+  const size = apk ? (apk.size/1048576).toFixed(1) + " MB" : "";
+  meta.innerHTML =
+    `<span class="chip">${esc(rel.tag_name || "")}</span>` +
+    (date ? `<span class="muted">${esc(date)}</span>` : "") +
+    (size ? `<span class="muted">${esc(size)}</span>` : "");
+  if(apk){
+    btn.href = apk.browser_download_url;
+    btn.textContent = "Download APK";
+    btn.setAttribute("download","");
+  }
+}
+
+async function load(){
+  const cache = readCache();
+  const fresh = {};
+  for(const a of APPS){
+    if(cache[a.repo]){ fill(a.repo, cache[a.repo]); fresh[a.repo] = cache[a.repo]; continue; }
+    try{
+      const r = await fetch(`https://api.github.com/repos/${OWNER}/${a.repo}/releases/latest`,
+                            {headers:{Accept:"application/vnd.github+json"}});
+      if(!r.ok) continue;
+      const j = await r.json();
+      const slim = {
+        tag_name: j.tag_name,
+        published_at: j.published_at,
+        assets: (j.assets||[]).map(x => ({name:x.name, size:x.size, browser_download_url:x.browser_download_url}))
+      };
+      fresh[a.repo] = slim;
+      fill(a.repo, slim);
+    }catch(e){ /* leave the Releases link as it is */ }
+  }
+  if(Object.keys(fresh).length) writeCache(fresh);
+}
+
+render();
+load();
+
+try{
+  if(!sessionStorage.getItem("flashed")){
+    document.getElementById("flash").classList.add("run");
+    sessionStorage.setItem("flashed","1");
+  }
+}catch(e){}
+</script>
+</body>
+</html>
