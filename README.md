@@ -23,8 +23,12 @@ the GitHub Releases API at page load.
 ## Installing an app
 
 Download the APK from the app's Releases page and open it on the phone, or push
-it over ADB with `adb install`. To get updates automatically, add the app's
-GitHub repository to [Obtainium](https://github.com/ImranR98/Obtainium).
+it over ADB with `adb install`. You can also sideload it with
+[Mudita Center](https://mudita.com/products/apps/mudita-center/) — open
+*Your Kompakt → Manage Files → App installers*, add the APK, then tap it on the
+phone and accept the install (needs Mudita Center 3.1.0 and MuditaOS K 1.2.0 or
+newer). To get updates automatically, add the app's GitHub repository to
+[Obtainium](https://github.com/ImranR98/Obtainium).
 
 ## Developing the page
 

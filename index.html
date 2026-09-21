@@ -96,7 +96,7 @@
   .btn:hover,.btn:focus-visible{outline:none;box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--rule)}
   a:focus-visible{outline:2px solid var(--rule);outline-offset:2px}
 
-  .install{padding:clamp(2.4rem,6vw,4rem) 0;display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+  .install{padding:clamp(2.4rem,6vw,4rem) 0;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
   .install h3{margin:0 0 .5rem;font-size:1.05rem;font-weight:700}
   .install p{margin:0;color:var(--ink-soft);max-width:44ch;font-size:.95rem}
   .install code{font-size:.85em;border:1px solid var(--rule);padding:0 .28em}
@@ -142,6 +142,10 @@
     <div>
       <h3>Installing</h3>
       <p>Download the APK and open it on the phone, or push it over ADB with <code>adb install</code>. The Kompakt will ask you to allow installs from the browser or file manager once.</p>
+    </div>
+    <div>
+      <h3>Via Mudita Center</h3>
+      <p>In <a href="https://mudita.com/products/apps/mudita-center/">Mudita Center</a>, open <em>Your Kompakt → Manage Files → App installers</em>, add the APK, then tap it on the phone and accept the install. Needs Mudita Center 3.1.0 and MuditaOS&nbsp;K 1.2.0 or newer.</p>
     </div>
     <div>
       <h3>Staying up to date</h3>
