@@ -99,7 +99,7 @@
   .install{padding:clamp(2.4rem,6vw,4rem) 0;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
   .install h3{margin:0 0 .5rem;font-size:1.05rem;font-weight:700}
   .install p{margin:0;color:var(--ink-soft);max-width:44ch;font-size:.95rem}
-  .install code{font-size:.85em;border:1px solid var(--rule);padding:0 .28em}
+  .install code{font-size:.85em;border:1px solid var(--rule);padding:0 .28em;white-space:nowrap}
   .install a{color:inherit}
 
   footer{border-top:1px solid var(--rule);padding:1.6rem 0 3rem;display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:space-between;font-size:.9rem}
@@ -177,7 +177,9 @@ const APPS = [
   { repo:"kChat", name:"kChat",
     desc:"Plain client for OpenAI-compatible chat endpoints. Point it at your own server or any provider with an API key." },
   { repo:"kVexed", name:"kVexed",
-    desc:"The classic Vexed sliding-block puzzle. Nudge blocks together to clear the board — fully offline, no permissions, and rendered in flat black-and-white for e-ink." }
+    desc:"The classic Vexed sliding-block puzzle. Nudge blocks together to clear the board — fully offline, no permissions, and rendered in flat black-and-white for e-ink." },
+  { repo:"kGems", name:"kGems",
+    desc:"Match-three on an 8×8 board of seven gem types. Swap adjacent gems to line up three or more; cascades score higher. Endless, no permissions, no network, in 1-bit black-and-white." }
 ];
 
 const CACHE_KEY = "ok1cdj-releases-v1";
